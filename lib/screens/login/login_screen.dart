@@ -29,12 +29,12 @@ class LoginScreen extends StatelessWidget {
               ),
 
               SizedBox(height: 100,),
-             defualtTextBox(
-                 title: "Email",
-                 hint: 'Enter Your Email',
-               controller: emailController,
-               type: TextInputType.emailAddress,
-             ),
+              defualtTextBox(
+                title: "Email",
+                hint: 'Enter Your Email',
+                controller: emailController,
+                type: TextInputType.emailAddress,
+              ),
 
               SizedBox(height: 20,),
               defualtTextBox(
@@ -46,8 +46,8 @@ class LoginScreen extends StatelessWidget {
 
               SizedBox(height: 65,),
               defaultButton(
-                  function: (){} ,
-                  text: "Login",
+                function: (){} ,
+                text: "Login",
               ),
 
               SizedBox(height: 10,),
@@ -60,13 +60,13 @@ class LoginScreen extends StatelessWidget {
 
               SizedBox(height: 20,),
               FlatButton(
-                  onPressed:(){
-                    navigateTo(context, ForgorPasswordScreen());
-                  },
-                  child: Text('Forgot your password ?'),
+                onPressed:(){
+                  navigateTo(context, ForgorPasswordScreen());
+                },
+                child: Text('Forgot your password ?'),
               )
 
-              
+
             ],
           ),
         ),

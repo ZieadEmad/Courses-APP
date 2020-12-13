@@ -56,6 +56,12 @@ void navigateTo (context , widget)=>Navigator.push(
   MaterialPageRoute(builder: (context) => widget ),
 );
 
+void navigateAndFinish (context , widget)=>Navigator.pushAndRemoveUntil(
+  context,
+  MaterialPageRoute(builder: (context) => widget ),
+        (Route<dynamic> route) => false);
+
+
 Widget defualtTextBox({
   String title ,
    String hint = ' ' ,
@@ -89,3 +95,17 @@ Widget defualtTextBox({
     ],
   ),
 );
+
+void buildProgress({context , text})
+  => showDialog(
+      context: context,
+    builder: (context) => AlertDialog(
+      content: Row(
+        children: [
+          CircularProgressIndicator(),
+          SizedBox(width: 20,),
+          Expanded(child: Text(text)),
+        ],
+      ),
+    ),
+  );
