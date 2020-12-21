@@ -13,13 +13,11 @@ class DioHelper{
     );
   }
 
-  static Future<Response> postData({path,data}) async{
-await dio.post(
-  path,
- data: data,
-);
+  static Future<Response> postData({path,data}) async
+  {
+    return await dio.post(
+        path,
+       data: data,
+      );
 }
-
-
-
 }

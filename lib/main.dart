@@ -1,36 +1,62 @@
-import 'package:course_app/screens/login/cubit/cubit.dart';
+import 'package:course_app/layout/cubit/cubit.dart';
+import 'package:course_app/layout/home.dart';
 import 'package:course_app/screens/sign_up/cubit/cubit.dart';
 import 'package:course_app/screens/welcome/welcome_screen.dart';
 import 'package:course_app/shared/colors/colors_common.dart';
-import 'package:course_app/shared/network/remote/dio_helper.dart';
+import 'package:course_app/shared/componentes/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async
+{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  var widget;
+
+  await initpref().then((value)
+  {
+        if (getToken() != null && getToken().length > 0)
+        {
+          widget = HomeScreen() ;
+        }
+        else
+          {
+            widget = WelcomeScreen() ;
+          }
+      });
+  
+  runApp(MyApp(widget));
 }
 
 class MyApp extends StatelessWidget {
+  var widget;
+
+  MyApp(this.widget);
 
   @override
   Widget build(BuildContext context) {
-    DioHelper();
+
+    initApp();
+
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context)=> SignUpCubit(),),
+        BlocProvider(
+          create: (context) => SignUpCubit(),
+        ),
+        BlocProvider(
+          create: (context) => HomeCubit(),
+        ),
 
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Courses App',
         theme: ThemeData(
           primarySwatch: defaultColor,
           scaffoldBackgroundColor: Colors.grey[200],
         ),
-        home: WelcomeScreen(),
+        home: widget,
       ),
     );
   }
 }
-
-

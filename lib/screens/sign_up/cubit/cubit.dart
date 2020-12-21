@@ -4,10 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpCubit extends Cubit<SignUpStates>
 {
-
   SignUpCubit() : super(SignUpStateInitial());
   static SignUpCubit get(context) => BlocProvider.of(context);
-
 
 register({first, last, email, password, city})
 {
@@ -26,13 +24,10 @@ register({first, last, email, password, city})
   ).then((value)
   {
     emit(SignUpStateSuccess());
-  }
-  ).catchError((e)
+  }).catchError((e)
   {
     emit(SignUpStateError(e.toString()));
   });
 }
-
-
 }
 

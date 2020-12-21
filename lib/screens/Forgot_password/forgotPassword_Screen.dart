@@ -51,9 +51,6 @@ class ForgorPasswordScreen extends StatelessWidget {
                 ),
               ),
             ),
-
-
-
           ],
         ),
       ),
