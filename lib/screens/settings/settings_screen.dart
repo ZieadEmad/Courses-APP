@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              buildOneCard(
+              buildOneCardSettings(
                 title: 'Account Settings',
                 fisrtText: 'Account Security',
                 firstHeroTag: '1',
@@ -30,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
                 thirdHeroTag: '3',
                 thirdFunction: (){navigateTo(context,PushNotificationsScreen());},
               ),
-              buildOneCard(
+              buildOneCardSettings(
                 title: 'Support',
                 fisrtText: 'About App',
                 firstHeroTag: '4',

@@ -1,10 +1,50 @@
 import 'package:course_app/shared/colors/colors_common.dart';
 import 'package:course_app/shared/network/remote/dio_helper.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class CategoryModel {
+  String title;
+  IconData iconData;
+
+  CategoryModel(this.title, this.iconData);
+}
+
+List<CategoryModel> cat = [
+  CategoryModel(
+    'Mobile App',
+    Icons.lightbulb_outline,
+  ),
+  CategoryModel(
+    'UI & UX',
+    Icons.lightbulb_outline,
+  ),
+  CategoryModel(
+    'Front End',
+    Icons.lightbulb_outline,
+  ),
+  CategoryModel(
+    'Back End',
+    Icons.lightbulb_outline,
+  ),
+  CategoryModel(
+    'ML',
+    Icons.lightbulb_outline,
+  ),
+  CategoryModel(
+    'AI',
+    Icons.lightbulb_outline,
+  ),
+  CategoryModel(
+    'IOT',
+    Icons.lightbulb_outline,
+  ),
+];
 
 SharedPreferences preferences;
 
@@ -156,7 +196,7 @@ void showToast({@required text, @required error}) => Fluttertoast.showToast(
     textColor: Colors.white,
     fontSize: 16.0);
 
-Widget buildOneCard({
+Widget buildOneCardSettings({
   title,
   @required Function firstFunction,
   @required Function secondFunction,
@@ -170,7 +210,7 @@ Widget buildOneCard({
 }) {
   return Column(
     children: [
-      buildCardTitle(title: title),
+      buildCardTitleSettings(title: title),
       Container(
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -182,17 +222,17 @@ Widget buildOneCard({
               padding: EdgeInsets.only(left: 10),
               child: Column(
                 children: [
-                  buildRowCard(
+                  buildOneRowCardSettings(
                     function: firstFunction,
                     text: fisrtText,
                     heroTag: firstHeroTag,
                   ),
-                  buildRowCard(
+                  buildOneRowCardSettings(
                     function: secondFunction,
                     text: secondText,
                     heroTag: secondHeroTag,
                   ),
-                  buildRowCard(
+                  buildOneRowCardSettings(
                     function: thirdFunction,
                     text: thirdText,
                     heroTag: thirdHeroTag,
@@ -207,7 +247,7 @@ Widget buildOneCard({
   );
 }
 
-Widget buildRowCard(
+Widget buildOneRowCardSettings(
     {@required text, @required Function function, @required String heroTag}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -232,7 +272,7 @@ Widget buildRowCard(
   );
 }
 
-Widget buildCardTitle({@required title}) {
+Widget buildCardTitleSettings({@required title}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -257,6 +297,15 @@ Widget buildOneBox({
     width: width,
     height: height,
     padding: EdgeInsets.all(8),
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.1),
+         // spreadRadius:5,
+          blurRadius: 20,
+        ),
+      ]
+    ),
     child: InkWell(
       onTap: function,
       borderRadius: BorderRadius.circular(15),
@@ -291,87 +340,179 @@ Widget buildOneBox({
   );
 }
 
-Widget buildOneRowBox(
-    {@required String headText, @required String descriptionText}) {
-  return Container(
-    padding: EdgeInsets.all(10),
-    width: 400,
-     height: 100,
+
+//Abddalaa
+Widget buildSearchCategoryItem(CategoryModel model, context) => GestureDetector(
+  onTap: () {
+  },
+  child: Container(
+    height: 100.0,
+    width: 100.0,
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(30)),
+      borderRadius: BorderRadius.circular(
+        15.0,
+      ),
       color: Colors.white,
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            Row(
-              children: [
-                Container(
-                  child: CircleAvatar(
-                    backgroundColor: defaultColor,
-                    child: Center(
-                      child: Icon(
-                        OMIcons.school,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  width: 50,
-                  height: 50,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      headText,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                      descriptionText,
-                      style: TextStyle(fontSize: 13, color: Colors.grey[700]),
-                      textAlign: TextAlign.start,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+        CircleAvatar(
+          radius: 15.0,
+          child: Icon(
+            model.iconData,
+            size: 16.0,
+          ),
         ),
-        Row(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Total ratings',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Text('Ngooooooom'),
-              ],
-            ),
-          ],
+        SizedBox(
+          height: 10.0,
+        ),
+        Text(
+          model.title,
+          style: TextStyle(
+              color: Colors.black87,
+              fontSize: 14,
+              fontWeight: FontWeight.bold
+          ),
         ),
       ],
     ),
-  );
-}
+  ),
+);
 
+Widget buildCourseItems() => Padding(
+  padding: EdgeInsets.symmetric(horizontal: 20.0,),
+  child: Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(15.0,),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 10,
+        ),
+      ],
+    ),
+    padding: EdgeInsets.symmetric(vertical: 5.0,),
+    child: ExpansionTileCard(
+      baseColor: Colors.white,
+      expandedColor: Colors.white,
+      elevation: 0.0,
+      title: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 25.0,
+          ),
+          SizedBox(
+            width: 15.0,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:
+              [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Web Design',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 16,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    RatingBar.builder(
+                      initialRating: 4.5,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 10.0,
+                      ignoreGestures: true,
+                      itemPadding: EdgeInsets.zero,
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating)
+                      {
+                        print(rating);
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Text(
+                  'Become a web designer that looks grate on all devices.',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      onExpansionChanged: (value)
+      {
 
+      },
+      children: <Widget>[
+        Text('test'),
+      ],
+    ),
+  ),
+);
 
+Widget buildProfileItem({@required title, @required Widget shape,@required function}) => Expanded(
+  child: GestureDetector(
+    onTap: function,
+    child: Container(
+      height: 140.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          15.0,
+        ),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 10,
+            blurRadius: 15,
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 30.0,
+            child: shape,
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          Text(
+            title.toString(),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.black87,
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+);

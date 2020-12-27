@@ -20,7 +20,7 @@ class SearchScreen extends StatelessWidget {
                 Stack(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.only(left: 10,right: 80,top: 10,bottom: 10),
                       width: 400,
                       height: 58,
                       decoration: BoxDecoration(
@@ -125,24 +125,12 @@ class SearchScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
+                SizedBox(height: 50),
+                buildCourseItems(),
                 SizedBox(height: 20),
-                buildOneRowBox(
-                  headText: 'WordPress',
-                  descriptionText:
-                      'Create your own website\nfrom scratch using Wordpress\nand more!',
-                ),
+                buildCourseItems(),
                 SizedBox(height: 20),
-                buildOneRowBox(
-                  headText: 'Web Design',
-                  descriptionText:
-                      'Become a web designer\nthat looks grate on  all devices.',
-                ),
-                SizedBox(height: 20),
-                buildOneRowBox(
-                  headText: 'CSS',
-                  descriptionText:
-                      'Learn CSS for the first time\nor increase your knowledge\nas a web developer. ',
-                ),
+                buildCourseItems(),
               ],
             ),
           ),
