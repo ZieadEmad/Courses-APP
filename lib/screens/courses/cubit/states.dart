@@ -4,6 +4,8 @@ class CoursesStatesInitial extends CoursesStates {}
 
 class CoursesStatesLoading extends CoursesStates {}
 
+class CoursesStatesLoadingMore extends CoursesStates {}
+
 class CoursesStatesSuccess extends CoursesStates {}
 
 class CoursesStatesError extends CoursesStates

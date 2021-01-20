@@ -33,8 +33,7 @@ class LoginScreen extends StatelessWidget {
         if (state is LoginStateLoading) {
           buildProgress(context: context, text: "please Wait .. ");
         }
-        if (state is LoginStateSuccess)
-        {
+        if (state is LoginStateSuccess) {
           Navigator.pop(context);
           saveToken(state.token).then((value)
           {

@@ -380,100 +380,108 @@ Widget buildSearchCategoryItem(CategoryModel model, context) => GestureDetector(
   ),
 );
 
-Widget buildCourseItems() => Padding(
-  padding: EdgeInsets.symmetric(horizontal: 20.0,),
-  child: Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(15.0,),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 5,
-          blurRadius: 10,
-        ),
-      ],
-    ),
-    padding: EdgeInsets.symmetric(vertical: 5.0,),
-    child: ExpansionTileCard(
-      baseColor: Colors.white,
-      expandedColor: Colors.white,
-      elevation: 0.0,
-      title: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            radius: 25.0,
-          ),
-          SizedBox(
-            width: 15.0,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children:
-              [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Web Design',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                    RatingBar.builder(
-                      initialRating: 4.5,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemSize: 10.0,
-                      ignoreGestures: true,
-                      itemPadding: EdgeInsets.zero,
-                      itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      onRatingUpdate: (rating)
-                      {
-                        print(rating);
-                      },
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  'Become a web designer that looks grate on all devices.',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12
-                  ),
-                ),
-              ],
-            ),
+Widget buildCourseItems(course) {
+  return Padding(
+    padding: EdgeInsets.symmetric(horizontal: 20.0,),
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15.0,),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 10,
           ),
         ],
       ),
-      onExpansionChanged: (value)
-      {
+      padding: EdgeInsets.symmetric(vertical: 5.0,),
+      child: ExpansionTileCard(
+        baseColor: Colors.white,
+        expandedColor: Colors.white,
+        elevation: 0.0,
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color:defaultColor,
+                image: DecorationImage(image: NetworkImage(course['image'])),
+              ),
+              width: 60,
+              height: 60,
+            ),
+            SizedBox(
+              width: 15.0,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:
+                [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${course['title']}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ),
+                      // RatingBar.builder(
+                      //   initialRating: 4.5,
+                      //   minRating: 1,
+                      //   direction: Axis.horizontal,
+                      //   allowHalfRating: true,
+                      //   itemCount: 5,
+                      //   itemSize: 10.0,
+                      //   ignoreGestures: true,
+                      //   itemPadding: EdgeInsets.zero,
+                      //   itemBuilder: (context, _) => Icon(
+                      //     Icons.star,
+                      //     color: Colors.amber,
+                      //   ),
+                      //   onRatingUpdate: (rating)
+                      //   {
+                      //     print(rating);
+                      //   },
+                      // )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    '${course['description']}',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        onExpansionChanged: (value)
+        {
 
-      },
-      children: <Widget>[
-        Text('test'),
-      ],
+        },
+        children: <Widget>[
+          Text('test'),
+        ],
+      ),
     ),
-  ),
-);
+  );
+}
 
 Widget buildProfileItem({@required title, @required Widget shape,@required function}) => Expanded(
   child: GestureDetector(
