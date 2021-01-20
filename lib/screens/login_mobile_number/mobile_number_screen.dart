@@ -75,7 +75,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                           text: 'please enter a valid Phone number', error: true);
                       return;
                     }
-                    sendCode(phone,context,codeController.text);
+                    sendCode(phone);
                   }
               },
               text: isCode? "Start" :"Next",
@@ -86,25 +86,22 @@ class _PhoneScreenState extends State<PhoneScreen> {
     );
   }
 
-  void sendCode(String number,ctx,code) async {
+  void sendCode(String number) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: number,
+      phoneNumber: '+2$number',
       verificationCompleted: (PhoneAuthCredential credential)
       {
 
       },
       verificationFailed: (FirebaseAuthException e)
       {
-
+        print(e.message);
       },
       codeSent: (String verificationId , int resendToken)
       {
         isCode = true;
         verCode = verificationId ;
-        setState(() {
-
-        });
-
+        setState(() {});
         // if (code == VerifcationId)
         // {
         //   navigateAndFinish(ctx, HomeScreen());
@@ -116,12 +113,10 @@ class _PhoneScreenState extends State<PhoneScreen> {
         //   return;
         // }
       } ,
-
       codeAutoRetrievalTimeout: (String verificationId)
       {
 
       },
-
     );
   }
 
