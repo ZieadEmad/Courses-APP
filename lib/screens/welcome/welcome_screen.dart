@@ -1,4 +1,5 @@
 import 'package:course_app/layout/home.dart';
+import 'package:course_app/screens/courses/cubit/cubit.dart';
 import 'package:course_app/screens/login/login_screen.dart';
 import 'package:course_app/screens/login_mobile_number/mobile_number_screen.dart';
 import 'package:course_app/screens/sign_up/signup_screen.dart';
@@ -118,6 +119,7 @@ class WelcomeScreen extends StatelessWidget {
       print(value.displayName);
       print(value.photoUrl);
 
+
       GoogleSignInAuthentication googleSignInAuthentication = await value.authentication;
 
       AuthCredential credential = GoogleAuthProvider.credential(
@@ -129,6 +131,7 @@ class WelcomeScreen extends StatelessWidget {
           .signInWithCredential(credential)
           .then((value) {
         print(value.user.uid);
+        //print('token-------${googleSignInAuthentication.accessToken}');
         saveToken(googleSignInAuthentication.accessToken).then((value)
         {
           if(value){

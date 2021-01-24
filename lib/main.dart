@@ -1,5 +1,6 @@
 import 'package:course_app/layout/cubit/cubit.dart';
 import 'package:course_app/layout/home.dart';
+import 'package:course_app/screens/profile/cubit/cubit.dart';
 import 'package:course_app/screens/sign_up/cubit/cubit.dart';
 import 'package:course_app/screens/welcome/welcome_screen.dart';
 import 'package:course_app/shared/colors/colors_common.dart';
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => HomeCubit(),
         ),
+        // BlocProvider(
+        //   create: (context) => ProfileCubit(),
+        // ),
 
       ],
       child: MaterialApp(
